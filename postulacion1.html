@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convocatoria 1 · Educación Inicial en el Hogar — Aguachica | CORDESCO</title>
+<style>
+    :root{
+        --ink:#1A241E; --green:#008547; --green-d:#04503A; --green-x:#023024; --red:#DA2925;
+        --blue:#0067AB; --line:#DFE7E2; --soft:#EDF2EF; --muted:#5B6A62; --paper:#fff;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+        font-family:'Segoe UI',Roboto,system-ui,-apple-system,sans-serif;
+        background:var(--soft);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;
+    }
+    h1,h2,h3{font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;font-weight:600;color:var(--green-d);}
+    a{color:var(--blue);}
+
+    /* ================== ESTRUCTURA: PANEL + HOJA ================== */
+    .layout{display:grid;grid-template-columns:330px minmax(0,1fr);align-items:start;}
+
+    /* ---------- PANEL LATERAL ---------- */
+    .panel{
+        position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--green-x);color:#fff;
+        padding:2.2rem 1.7rem 1.6rem;display:flex;flex-direction:column;gap:1.5rem;
+        border-right:1px solid rgba(0,0,0,.2);
+    }
+    .panel .marca{display:flex;flex-direction:column;align-items:flex-start;gap:.7rem;}
+    .panel .marca img{width:78px;height:auto;background:#fff;padding:6px;border-radius:50%;}
+    .panel .marca b{font-family:'Palatino Linotype',Palatino,Georgia,serif;font-size:1.05rem;
+        letter-spacing:.18em;color:#fff;}
+    .panel .marca span{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+        color:rgba(255,255,255,.6);line-height:1.5;}
+    .folio{
+        align-self:flex-start;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+        color:#fff;border:1px solid rgba(255,255,255,.4);padding:.28rem .65rem;
+    }
+    .panel h2.panel-titulo{color:#fff;font-size:1.28rem;line-height:1.25;letter-spacing:-.01em;}
+    .panel .panel-sub{font-size:.78rem;color:rgba(255,255,255,.72);margin-top:.35rem;}
+
+    .fichas{display:grid;gap:.55rem;border-top:1px solid rgba(255,255,255,.17);padding-top:1.1rem;}
+    .ficha{display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;font-size:.78rem;}
+    .ficha dt{color:rgba(255,255,255,.6);}
+    .ficha dd{color:#fff;font-weight:700;text-align:right;}
+
+    .reloj{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.17);padding:.85rem .9rem;}
+    .reloj .lbl{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.62);}
+    .reloj .fecha{font-family:'Palatino Linotype',Palatino,Georgia,serif;font-size:.92rem;color:#fff;margin:.15rem 0 .6rem;}
+    .cd{display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;}
+    .cd div{background:rgba(0,0,0,.22);padding:.26rem .05rem;text-align:center;}
+    .cd b{display:block;font-size:.9rem;color:#fff;font-family:'Palatino Linotype',Palatino,Georgia,serif;}
+    .cd small{font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+
+    .panel .postular-btn{
+        display:block;text-align:center;background:var(--red);color:#fff;text-decoration:none;
+        font-weight:700;font-size:.8rem;letter-spacing:.06em;padding:.72rem .8rem;
+    }
+    .panel .postular-btn:hover{background:#B41F1C;}
+    .panel .pie-panel{margin-top:auto;border-top:1px solid rgba(255,255,255,.17);padding-top:.9rem;
+        font-size:.68rem;color:rgba(255,255,255,.55);line-height:1.6;}
+    .panel .pie-panel b{color:rgba(255,255,255,.8);display:block;font-size:.6rem;letter-spacing:.14em;
+        text-transform:uppercase;margin-bottom:.25rem;}
+
+    /* ---------- HOJA ---------- */
+    .hoja{background:var(--paper);min-height:100vh;padding:3rem 3.4rem 3.4rem;max-width:960px;}
+    .hoja .entradilla{border-bottom:2px solid var(--green-d);padding-bottom:1.4rem;margin-bottom:2.6rem;}
+    .hoja .entradilla .et{
+        font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:700;
+    }
+    .hoja .entradilla h1{font-size:1.95rem;line-height:1.18;margin:.4rem 0 .6rem;}
+    .hoja .entradilla p{font-size:.9rem;color:var(--muted);max-width:68ch;}
+
+    .bloque{margin-bottom:3.2rem;scroll-margin-top:1.5rem;}
+    .bloque > h2{
+        display:flex;align-items:center;gap:.85rem;font-size:1.35rem;margin-bottom:.5rem;
+    }
+    .bloque > h2 span{
+        font-family:'Palatino Linotype',Palatino,Georgia,serif;font-size:.78rem;color:#fff;background:var(--green-d);
+        padding:.3rem .6rem;letter-spacing:.1em;
+    }
+    .bloque > .intro{font-size:.88rem;color:var(--muted);margin-bottom:1.3rem;max-width:70ch;}
+
+    /* ---------- ACORDEÓN DE CARGOS ---------- */
+    .acordeon{border-top:1px solid var(--line);}
+    .puesto{border-bottom:1px solid var(--line);}
+    .puesto summary{
+        list-style:none;cursor:pointer;display:grid;grid-template-columns:34px 1fr auto 26px;
+        align-items:center;gap:.9rem;padding:1rem .3rem;
+    }
+    .puesto summary::-webkit-details-marker{display:none;}
+    .puesto summary:hover{background:#F7FAF8;}
+    .p-num{font-family:'Palatino Linotype',Palatino,Georgia,serif;font-size:.8rem;color:#A9B8AF;}
+    .p-tit{font-family:'Palatino Linotype',Palatino,Georgia,serif;font-size:1.06rem;color:var(--green-d);}
+    .p-meta{font-size:.72rem;color:var(--muted);letter-spacing:.03em;white-space:nowrap;}
+    .chev{width:26px;height:26px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+        color:var(--green-d);font-size:1rem;line-height:1;}
+    .chev::before{content:"+";}
+    .puesto[open] .chev::before{content:"–";}
+    .puesto[open] .chev{background:var(--green);border-color:var(--green);color:#fff;}
+    .puesto[open] summary{background:#F7FAF8;}
+    .p-cuerpo{padding:0 .3rem 1.4rem 3.4rem;}
+    .perfil{padding:.9rem 0 0;border-top:1px dotted #D2DED7;margin-top:.9rem;}
+    .perfil:first-child{border-top:none;margin-top:0;padding-top:0;}
+    .perfil-top{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.4rem;}
+    .perfil-top .nombre{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#fff;
+        background:var(--green);padding:.14rem .5rem;}
+    .perfil-top .exp{font-size:.76rem;color:var(--muted);}
+    .perfil-top .exp b{color:var(--red);font-weight:700;}
+    ul.reqs{list-style:none;}
+    ul.reqs li{position:relative;padding-left:1.1rem;font-size:.88rem;color:#33413A;margin-bottom:.22rem;}
+    ul.reqs li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--green);}
+    .cerrado{opacity:.5;}
+    .p-cerrado{border:1px solid #E7DCD9;background:#FCF4F3;color:#8B3A35;font-size:.8rem;padding:.6rem .8rem;}
+
+    /* ---------- TABLA DE DOCUMENTOS ---------- */
+    .tabla-docs{width:100%;border-collapse:collapse;}
+    .tabla-docs thead th{
+        text-align:left;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+        font-weight:700;padding:.5rem .6rem;border-bottom:2px solid var(--green-d);
+    }
+    .tabla-docs thead th:first-child{width:44px;}
+    .tabla-docs thead th:last-child{width:126px;text-align:right;}
+    .tabla-docs tbody td{padding:.62rem .6rem;border-bottom:1px solid #EBF0EC;vertical-align:top;}
+    .tabla-docs tbody tr:nth-child(even){background:#FAFCFB;}
+    .tabla-docs .num{font-family:'Palatino Linotype',Palatino,Georgia,serif;font-size:.78rem;color:#A9B8AF;}
+    .tabla-docs .doc{font-size:.88rem;color:#2A362F;line-height:1.45;}
+    .tabla-docs .nota{font-size:.76rem;color:var(--muted);margin-top:.12rem;}
+    .tabla-docs .acc{text-align:right;font-size:.74rem;font-weight:700;white-space:nowrap;}
+    .tabla-docs .acc a{text-decoration:none;border-bottom:1px solid #BFD8EA;margin-left:.45rem;}
+    .tabla-docs .acc a:first-child{margin-left:0;}
+    .tabla-docs .acc .nada{color:#B3C0B8;font-weight:400;}
+
+    .aviso-docs{
+        margin-top:1.4rem;border-left:3px solid var(--red);background:#FDF3F2;padding:.85rem 1.1rem;
+        font-size:.84rem;color:#7A2420;
+    }
+
+    /* ---------- POSTULACIÓN ---------- */
+    .via{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:1.6rem;}
+    .via article{border:1px solid var(--line);padding:1.1rem 1.2rem;background:#FCFDFC;}
+    .via .paso-n{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700;}
+    .via h3{font-size:1rem;margin:.25rem 0 .35rem;}
+    .via p{font-size:.85rem;color:#33413A;}
+
+    .buzon{border:2px solid var(--green-d);padding:1.2rem 1.4rem;display:grid;
+        grid-template-columns:1fr auto;gap:1rem;align-items:center;background:#F5FAF7;}
+    .buzon .lbl{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+    .buzon .dir{font-family:'Palatino Linotype',Palatino,Georgia,serif;font-size:1.25rem;color:var(--green-d);
+        word-break:break-all;line-height:1.3;}
+    .buzon .asunto{grid-column:1/-1;border-top:1px dashed #C9DCD1;padding-top:.8rem;font-size:.82rem;color:#33413A;}
+    .buzon .asunto code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.79rem;background:#E9F2EC;
+        padding:.12rem .45rem;color:var(--green-d);}
+    .buzon .btn{
+        background:var(--red);color:#fff;text-decoration:none;font-weight:700;font-size:.8rem;
+        letter-spacing:.05em;padding:.7rem 1.1rem;white-space:nowrap;
+    }
+    .buzon .btn:hover{background:#B41F1C;}
+
+    .form-caja{margin-top:1.8rem;border:1px solid var(--line);}
+    .form-caja .fh{padding:.7rem 1.1rem;border-bottom:1px solid var(--line);background:#F2F7F4;
+        font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);font-weight:700;}
+    .form-iframe{width:100%;height:1250px;border:none;display:block;}
+
+    .hoja .cierre-hoja{border-top:1px solid var(--line);padding-top:1.3rem;font-size:.76rem;color:var(--muted);
+        display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+
+    /* ================== RESPONSIVO ================== */
+    @media(max-width:980px){
+        .layout{grid-template-columns:1fr;}
+        .panel{position:static;height:auto;}
+        .panel .marca{flex-direction:row;align-items:center;}
+        .panel .marca img{width:62px;}
+        .fichas{grid-template-columns:1fr 1fr;}
+        .hoja{padding:2rem 1.3rem 2.6rem;max-width:none;}
+        .hoja .entradilla h1{font-size:1.55rem;}
+        .via{grid-template-columns:1fr;}
+        .buzon{grid-template-columns:1fr;}
+        .buzon .btn{justify-self:start;}
+        .puesto summary{grid-template-columns:26px 1fr 24px;gap:.7rem;}
+        .p-meta{display:none;}
+        .p-cuerpo{padding-left:0;}
+        .tabla-docs, .tabla-docs tbody{display:block;width:100%;}
+        .tabla-docs thead{display:none;}
+        .tabla-docs tbody tr{display:grid;grid-template-columns:34px 1fr;width:100%;border-bottom:1px solid #EBF0EC;}
+        .tabla-docs tbody td{display:block;border-bottom:none;padding:.4rem .4rem;}
+        .tabla-docs tbody td.num{grid-row:1 / span 2;padding-top:.6rem;}
+        .tabla-docs tbody td:nth-child(2){grid-column:2;grid-row:1;padding-bottom:0;}
+        .tabla-docs tbody td.acc{grid-column:2;grid-row:2;text-align:left;padding:.15rem .4rem .6rem;}
+        .form-iframe{height:1500px;}
+    }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- ============ PANEL ============ -->
+    <aside class="panel">
+        <div class="marca">
+            <img src="logo_cordesco.png" alt="CORDESCO">
+            <div>
+                <b>CORDESCO</b>
+                <span>Corporación Desarrollo Social<br>y Comunitario</span>
+            </div>
+        </div>
+
+        <span class="folio">Convocatoria N.º 1 · 2026</span>
+
+        <div>
+            <h2 class="panel-titulo">Educación Inicial en el Hogar</h2>
+            <p class="panel-sub">Aguachica, Cesar · Modalidad familiar y comunitaria</p>
+        </div>
+
+        <dl class="fichas">
+            <div class="ficha"><dt>Cobertura</dt><dd>740 cupos</dd></div>
+            <div class="ficha"><dt>Cargos</dt><dd>6</dd></div>
+            <div class="ficha"><dt>Municipio</dt><dd>Aguachica</dd></div>
+            <div class="ficha"><dt>Estado</dt><dd id="estado-ficha">Abierta</dd></div>
+        </dl>
+
+        <div class="reloj">
+            <div class="lbl">Cierre de postulaciones</div>
+            <div class="fecha" id="cierre-val">martes 17/11/2026 a las 5:00 p. m.</div>
+            <div class="cd" id="contador"></div>
+        </div>
+
+        <a class="postular-btn" href="#postular">Cómo postularme</a>
+
+        <div class="pie-panel">
+            <b>Correos oficiales</b>
+            corporacioncordesco@gmail.com<br>
+            corporacioncordesco@yahoo.com<br>
+            NIT 830.508.876-8 · Reg. Merc. S0502491
+        </div>
+    </aside>
+
+    <!-- ============ HOJA ============ -->
+    <main class="hoja">
+
+        <div class="entradilla">
+            <div class="et">Convocatoria de talento humano</div>
+            <h1>Seis cargos para el servicio de Educación Inicial en el Hogar</h1>
+            <p>La Corporación Desarrollo Social y Comunitario — CORDESCO recibe hojas de vida para atender
+                740 cupos de primera infancia en Aguachica, Cesar. Abra cada cargo para ver los perfiles y
+                la experiencia que exige, revise la lista de documentos y postúlese por la encuesta y el correo.</p>
+        </div>
+
+        <section class="bloque" id="cargos">
+            <h2><span>01</span> Cargos y perfiles</h2>
+            <p class="intro">Haga clic en un cargo para desplegar sus perfiles, el título que exige cada uno y la
+                experiencia mínima. Si su formación no encaja en el perfil, la hoja de vida no pasa el filtro.</p>
+            <div class="acordeon" id="lista-cargos"></div>
+        </section>
+
+        <section class="bloque" id="documentos">
+            <h2><span>02</span> Documentos del expediente</h2>
+            <p class="intro">Estos son los documentos que pide la corporación, <b>en este orden</b>. Los dos formatos que hay
+                que firmar se descargan aquí abajo (Word para diligenciar y PDF para leer); los demás se piden
+                en la entidad que los emite o se descargan en el enlace de su fila.</p>
+            <table class="tabla-docs">
+                <thead>
+                    <tr><th>N.º</th><th>Documento</th><th>Enlace</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="num">01</td><td><div class="doc">Formato de autorización de tratamiento de datos personales, firmado</div><div class="nota">Descárguelo, fírmelo y adjúntelo con fecha de noviembre de 2026.</div></td><td class="acc"><a href="documentos/01_autorizacion_tratamiento_datos_personales.doc" download>Word</a><a href="documentos/01_autorizacion_tratamiento_datos_personales.pdf" target="_blank" rel="noopener">PDF</a></td></tr>
+                    <tr><td class="num">02</td><td><div class="doc">Fotografía 3 x 4, fondo blanco</div><div class="nota">Dentro de la hoja de vida.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">03</td><td><div class="doc">Fotocopia de la cédula de ciudadanía</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">04</td><td><div class="doc">Diplomas de estudio</div><div class="nota">Inicie por el diploma de grado más actual.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">05</td><td><div class="doc">Acta de grado</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">06</td><td><div class="doc">Tarjeta profesional</div><div class="nota">Si aplica.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">07</td><td><div class="doc">Certificado de inscripción y/o resolución de la Secretaría de Salud Departamental — RETHUS</div><div class="nota">Si aplica.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">08</td><td><div class="doc">Certificados laborales</div><div class="nota">De los más recientes a los más antiguos.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">09</td><td><div class="doc">Certificados o diplomas de otros estudios</div><div class="nota">De los más recientes a los más antiguos.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">10</td><td><div class="doc">Antecedentes disciplinarios — Procuraduría</div><div class="nota">Válido del mes de octubre o noviembre.</div></td><td class="acc"><a href="https://www.procuraduria.gov.co/portal/antecedentes.html" target="_blank" rel="noopener">Descargar ↗</a></td></tr>
+                    <tr><td class="num">11</td><td><div class="doc">Antecedentes fiscales — Contraloría</div><div class="nota">Válido del mes de octubre o noviembre.</div></td><td class="acc"><a href="https://www.contraloria.gov.co/" target="_blank" rel="noopener">Descargar ↗</a></td></tr>
+                    <tr><td class="num">12</td><td><div class="doc">Antecedentes judiciales — Policía Nacional</div><div class="nota">Válido del mes de octubre o noviembre.</div></td><td class="acc"><a href="https://antecedentes.policia.gov.co" target="_blank" rel="noopener">Descargar ↗</a></td></tr>
+                    <tr><td class="num">13</td><td><div class="doc">Registro Nacional de Medidas Correctivas (RNMC — Policía)</div><div class="nota">Válido del mes de octubre o noviembre.</div></td><td class="acc"><a href="https://antecedentes.policia.gov.co" target="_blank" rel="noopener">Descargar ↗</a></td></tr>
+                    <tr><td class="num">14</td><td><div class="doc">Documento firmado de autorización de consulta de inhabilidades</div><div class="nota">Descárguelo, fírmelo y adjúntelo con fecha de noviembre de 2026.</div></td><td class="acc"><a href="documentos/14_autorizacion_consulta_inhabilidades.doc" download>Word</a><a href="documentos/14_autorizacion_consulta_inhabilidades.pdf" target="_blank" rel="noopener">PDF</a></td></tr>
+                    <tr><td class="num">15</td><td><div class="doc">Certificado de inhabilidades por delitos sexuales</div><div class="nota">Válido del mes de octubre o noviembre.</div></td><td class="acc"><a href="https://www.icbf.gov.co/" target="_blank" rel="noopener">Consultar ↗</a></td></tr>
+                    <tr><td class="num">16</td><td><div class="doc">Certificado de REDAM</div><div class="nota">Válido del mes de octubre o noviembre.</div></td><td class="acc"><a href="https://www.redam.gov.co/" target="_blank" rel="noopener">Consultar ↗</a></td></tr>
+                    <tr><td class="num">17</td><td><div class="doc">Antecedentes deontológicos</div><div class="nota">Solo profesionales psicosociales.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">18</td><td><div class="doc">Certificado de obtención de tarjeta profesional</div><div class="nota">Solo profesionales psicosociales.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">19</td><td><div class="doc">Registro Único Tributario (RUT) actualizado</div><div class="nota">Debe ser del año 2026 y ser visible.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">20</td><td><div class="doc">Certificado bancario</div><div class="nota">Mes de octubre o noviembre.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">21</td><td><div class="doc">Examen de salud ocupacional</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">22</td><td><div class="doc">Certificado de afiliación a salud</div><div class="nota">Mes de noviembre. Si no cuenta con el anexo de ADRES.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">23</td><td><div class="doc">Certificado de afiliación a pensión</div><div class="nota">Mes de noviembre.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                    <tr><td class="num">24</td><td><div class="doc">Certificado de afiliación a ARL</div><div class="nota">Mes de noviembre. Si no tiene el actual, envíe el pasado y luego el de noviembre.</div></td><td class="acc"><span class="nada">—</span></td></tr>
+                </tbody>
+            </table>
+            <div class="aviso-docs">
+                <b>Antes de enviar:</b> todo en PDF y legible · antecedentes y certificados del mes de octubre o
+                noviembre · formatos de autorización con fecha de noviembre de 2026 y firma · nombre los archivos
+                de forma clara · si son muchos, comprímalos en un .ZIP.
+            </div>
+        </section>
+
+        <section class="bloque" id="postular">
+            <h2><span>03</span> Cómo postularse</h2>
+            <p class="intro">Son dos pasos y los dos son obligatorios: si solo llena la encuesta, la hoja de vida no
+                queda registrada.</p>
+
+            <div class="via">
+                <article>
+                    <div class="paso-n">Paso 1 · Obligatorio</div>
+                    <h3>Encuesta de preselección</h3>
+                    <p>Diligencie el formulario que está al final de esta página con sus datos, el cargo y el perfil
+                        al que aspira.</p>
+                </article>
+                <article>
+                    <div class="paso-n">Paso 2 · Obligatorio</div>
+                    <h3>Envío de documentos</h3>
+                    <p>Envíe la hoja de vida con todos los soportes al correo de abajo, con el asunto indicado.</p>
+                </article>
+            </div>
+
+            <div class="buzon">
+                <div>
+                    <div class="lbl">Aquí llegan las hojas de vida</div>
+                    <div class="dir">convocatoriacordesco2026@gmail.com</div>
+                </div>
+                <a class="btn" href="mailto:convocatoriacordesco2026@gmail.com">Enviar documentos</a>
+                <div class="asunto">
+                    <b>Asunto:</b> <code>Aspirante [CARGO] - Aguachica - [NOMBRE]</code><br>
+                    En el cuerpo escriba nombre completo, cédula, teléfono y el cargo al que se postula.
+                </div>
+            </div>
+
+            <div class="form-caja">
+                <div class="fh">Paso 1 · Encuesta de preselección</div>
+                <iframe class="form-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSd5OfiRGPhFaT6Ip_zef1Yci-yiV4RYoJZRPe9tm4wddmkz-A/viewform?embedded=true" title="Encuesta de preselección"></iframe>
+            </div>
+        </section>
+
+        <div class="cierre-hoja">
+            <div><b>CORDESCO</b> · Corporación Desarrollo Social y Comunitario · NIT 830.508.876-8</div>
+            <div>Convocatoria 1 · Aguachica (Cesar) · Educación Inicial en el Hogar</div>
+        </div>
+    </main>
+</div>
+
+<script>
+const ROLES_HOGAR = [
+    {t:'Coordinador/a',p:[{n:'',r:['Profesional en ciencias de la educación: primera infancia, educación inicial, pedagogía infantil, educación infantil o preescolar','Profesionales en desarrollo familiar, educación especial, educación comunitaria, psicopedagogía, básica primaria','Licenciatura en artes plásticas, escénicas o musicales, lingüística y literatura','Profesional en psicología o trabajo social'],e:'36 meses (12 relacionados)'}]},
+    {t:'Agente Educativo/a',p:[{n:'Perfil 1',r:['Profesional en pedagogía infantil, educación preescolar, inicial, infantil, especial','Licenciatura en artes plásticas, escénicas, musicales o etnoeducación'],e:'6 meses'},{n:'Perfil 2',r:['Normalista superior o técnico en atención integral'],e:'12 meses'}]},
+    {t:'Profesional Psicosocial',p:[{n:'',r:['Psicología, trabajo social, desarrollo familiar o comunitario','Psicopedagogía, sociología o antropología'],e:'6 meses'}]},
+    {t:'Profesional Salud y Nutrición',p:[{n:'P1 Nutricionista',r:['Profesional en nutrición o nutrición y dietética'],e:'6 meses'},{n:'P1 Optativo',r:['Certificación culminación nutrición'],e:'6 meses prácticas/laboral'},{n:'P2 Enfermería',r:['Profesional en enfermería'],e:'6 meses prácticas/laboral'},{n:'P2 Optativo',r:['Técnico auxiliar enfermería'],e:'12 meses'}]},
+    {t:'Auxiliar Pedagógico/a',p:[{n:'Perfil 1',r:['Normalista superior o técnico atención integral'],e:'6 meses'},{n:'P2 Transitados',r:['Básica primaria + 6 años experiencia','Continuar hasta 9° grado'],e:'6 años'}]},
+    {t:'Auxiliar Administrativo/a',p:[{n:'',r:['Técnico/tecnólogo: económicas, administrativas, sistemas, SST'],e:'12 meses'}]}
+];
+
+const VACANTES_ABIERTAS = [
+    {t:'Coordinador/a'},
+    {t:'Agente Educativo/a'},
+    {t:'Profesional Psicosocial'},
+    {t:'Profesional Salud y Nutrición'},
+    {t:'Auxiliar Pedagógico/a'},
+    {t:'Auxiliar Administrativo/a'}
+];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function renderizarCargos(){
+    const cont = document.getElementById('lista-cargos');
+    cont.innerHTML = ROLES_HOGAR.map((rol,i) => {
+        const v = VACANTES_ABIERTAS.find(x => x.t === rol.t);
+        const abiertos = !v ? [] : (v.perfiles || rol.p.map(p => p.n));
+        const esAbierto = abiertos.length > 0;
+        const num = String(i+1).padStart(2,'0');
+        const meta = rol.p.length > 1 ? rol.p.length + ' perfiles' : rol.p[0].e;
+
+        let perfiles = '';
+        rol.p.forEach(perfil => {
+            const activo = abiertos.includes(perfil.n);
+            perfiles += `<div class="perfil${activo?'':' cerrado'}">`;
+            perfiles += `<div class="perfil-top">`;
+            if (perfil.n) perfiles += `<span class="nombre">${esc(perfil.n)}</span>`;
+            perfiles += `<span class="exp">Experiencia mínima: <b>${esc(perfil.e)}</b></span></div>`;
+            perfiles += `<ul class="reqs">`;
+            perfil.r.forEach(req => { perfiles += `<li>${esc(req)}</li>`; });
+            perfiles += `</ul></div>`;
+        });
+
+        return `<details class="puesto"${i === 0 ? ' open' : ''}>
+            <summary>
+                <span class="p-num">${num}</span>
+                <span class="p-tit">${esc(rol.t)}</span>
+                <span class="p-meta">${esc(meta)}</span>
+                <span class="chev" aria-hidden="true"></span>
+            </summary>
+            <div class="p-cuerpo">
+                ${esAbierto ? perfiles : '<div class="p-cerrado">Este cargo no está recibiendo hojas de vida en esta convocatoria.</div>'}
+            </div>
+        </details>`;
+    }).join('');
+}
+
+function actualizarContador(){
+    const el = document.getElementById('contador');
+    const deadline = new Date('2026-11-17T17:00:00').getTime();
+    if (isNaN(deadline)) {
+        el.innerHTML = '<div style="grid-column:1/-1;font-size:.72rem;color:rgba(255,255,255,.75)">Por confirmar</div>';
+        return;
+    }
+    const d = deadline - Date.now();
+    if (d < 0) {
+        document.getElementById('cierre-val').textContent = 'Recepción cerrada';
+        document.getElementById('estado-ficha').textContent = 'Cerrada';
+        el.innerHTML = '<div style="grid-column:1/-1;font-size:.72rem;color:#FFD9D8">No recibe más postulaciones.</div>';
+        return;
+    }
+    const dias = Math.floor(d/86400000), h = Math.floor(d%86400000/3600000),
+          m = Math.floor(d%3600000/60000), s = Math.floor(d%60000/1000);
+    el.innerHTML = `<div><b>${dias}</b><small>Días</small></div><div><b>${h}</b><small>Hor</small></div>
+                    <div><b>${m}</b><small>Min</small></div><div><b>${s}</b><small>Seg</small></div>`;
+}
+
+renderizarCargos();
+actualizarContador();
+setInterval(actualizarContador, 1000);
+</script>
+</body>
+</html>
