@@ -413,7 +413,7 @@ function actualizarContador(){
     }
     const dias = Math.floor(d/86400000), h = Math.floor(d%86400000/3600000),
           m = Math.floor(d%3600000/60000), s = Math.floor(d%60000/1000);
-    el.innerHTML = `<div><b>${dias}</b><small>Días</small></div><div><b>${h}</b><small>Hor</small></div>
+    el.innerHTML = `<div><b>${dias}</b><small>${dias===1?'Día':'Días'}</small></div><div><b>${h}</b><small>Horas</small></div>
                     <div><b>${m}</b><small>Min</small></div><div><b>${s}</b><small>Seg</small></div>`;
 }
 
